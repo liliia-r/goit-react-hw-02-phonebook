@@ -35,35 +35,31 @@ class Phonebook extends Component {
     const { name, number } = this.state;
     return (
       <div>
-        <form
-          className="PhonebookForm"
-          autoComplete="off"
-          onSubmit={this.handlerSubmit}
-        >
+        <form className="PhonebookForm" onSubmit={this.handlerSubmit}>
           <h2>Phonebook</h2>
 
-          <label className="Label">
+          <label htmlFor="name" className="Label">
             Name
             <input
               className="PhonebookForm__name"
               type="text"
+              id={name}
               name="name"
-              autoFocus
               value={name}
               onChange={this.handlerChange}
-            ></input>
+            />
           </label>
 
-          <label>
+          <label htmlFor="number">
             Number
             <input
               className="PhonebookForm__number"
               type="text"
+              id={number}
               name="number"
-              autoFocus
               value={number}
               onChange={this.handlerChange}
-            ></input>
+            />
           </label>
 
           <button className="PhonebookForm__btn" type="submit">

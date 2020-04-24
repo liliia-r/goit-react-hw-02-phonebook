@@ -1,22 +1,28 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ContactsFilter = ({ filter, onHandleChangeFilter }) => {
   return (
     <>
       <h2>Contacts</h2>
-      <label>
+      <label htmlFor="filter">
         Find contacts by name
         <input
           className="PhonebookForm__filter"
           type="text"
+          id={filter}
           name="filter"
-          autoFocus
           value={filter}
           onChange={onHandleChangeFilter}
-        ></input>
+        />
       </label>
     </>
   );
+};
+
+ContactsFilter.propTypes = {
+  filter: PropTypes.string,
+  onHandleChangeFilter: PropTypes.func.isRequired,
 };
 
 export default ContactsFilter;

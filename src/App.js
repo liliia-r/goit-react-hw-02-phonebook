@@ -22,12 +22,12 @@ export default class App extends Component {
   };
 
   addContact = (contact) => {
-    const isUniqueName = this.state.contacts.some(
+    const isExist = this.state.contacts.some(
       (savedContact) =>
         savedContact.name.toLowerCase() === contact.name.toLowerCase()
     );
 
-    if (isUniqueName) {
+    if (isExist) {
       toast.error(`${contact.name} is already in contacts.`);
       return;
     }
@@ -50,18 +50,19 @@ export default class App extends Component {
 
   render() {
     const { contacts, filter } = this.state;
-    const filteredContacts = contacts.filter((contact) => {
-      const nameContact = contact.name;
-      return nameContact.toLowerCase().includes(filter.toLowerCase());
+    const filteredContacts = contacts.filter(({ name }) => {
+      return name.toLowerCase().includes(filter.toLowerCase());
     });
     return (
       <>
         <Phonebook onHandlerSubmit={this.addContact} />
         <ToastContainer autoClose={5000} />
-        <ContactsFilter
-          filter={filter}
-          onHandleChangeFilter={this.handleChangeFilter}
-        />
+        {this.state.contacts.length >= 2 && (
+          <ContactsFilter
+            filter={filter}
+            onHandleChangeFilter={this.handleChangeFilter}
+          />
+        )}
         <Contacts
           filteredContacts={filteredContacts}
           onDeleteContact={this.deleteContact}
